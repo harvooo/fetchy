@@ -1,0 +1,74 @@
+#!/bin/bash
+if [ "$#" -eq 0 ]; then
+	echo " : $(cat /etc/os-release | grep -m 1 -oP '(?<=^NAME=")(.*)(?=")')"
+	echo " : $(uname -r)"
+	echo " : $(pacman -Q | wc -l)"
+	echo " : $(uptime -p | awk '{$1=""; print $0}' | sed 's/^ *//')"
+	echo " : $(df -h / | awk 'NR==2 {print $5}')"
+	echo "󰍛 : $(free -m | awk '/^Mem/ {print $3}')Mb / $(free -m | awk '/^Mem/ {print $2}')Mb"
+    exit 1
+fi
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --distro)
+            echo " : $(cat /etc/os-release | grep -m 1 -oP '(?<=^NAME=")(.*)(?=")')"
+            ;;
+        --host)
+            echo " : $(whoami)@$(hostname)"
+            ;;
+        --kernel)
+            echo " : $(uname -r)"
+            ;;
+		--packages)
+	    	echo " : $(pacman -Q | wc -l)"
+	    	;;
+		--used-ram)
+	    	echo "󰍛 : $(free -m | awk '/^Mem/ {print $3}')Mb"
+	    	;;
+		--available-ram)
+	    	echo "󰍛 : $(free -m | awk '/^Mem/ {print $7}')Mb"
+	    	;;
+		--total-ram)
+	    	echo "󰍛 : $(free -m | awk '/^Mem/ {print $2}')Mb"
+	    	;;
+		--ram)
+	    	echo "󰍛 : $(free -m | awk '/^Mem/ {print $3}')Mb / $(free -m | awk '/^Mem/ {print $2}')Mb"
+	    	;;
+		--cpu)
+	    	echo "󰾆 : $(top -b -n 1 | grep '%Cpu(s):' | awk '{print $2 + $4}')%"
+	    	;;
+		--uptime)
+			echo " : $(uptime -p | awk '{$1=""; print $0}' | sed 's/^ *//')"
+			;;
+		--local-ip)
+			echo "󱂇 : $(ip route get 1.2.3.4 | awk '{print $7}')"
+			;;
+		--ipv4)
+			echo " : $(curl -4 -s icanhazip.com)"
+			;;
+		--ipv6)
+			echo " : $(curl -6 -s icanhazip.com)"
+			;;
+		--root-usage)
+			echo " : $(df -h / | awk 'NR==2 {print $5}')"
+			;;
+		--efi-usage)
+			echo " : $(df -h /boot/efi | awk 'NR==2 {print $5}')"
+			;;
+		--swap-usage)
+			echo " : $(free | awk '/Swap:/ {printf "%.2f\n", $3/$2*100}')%"
+			;;
+		--desktop)
+			echo "󰧨 : $(echo $XDG_CURRENT_DESKTOP)"
+			;;
+    	--seperator)
+			echo ""
+			;;
+		*)
+        	echo "Invalid Argument: $1"
+	    	echo "Usage: $0 [--distro] [--host] [--kernel] [--packages]"
+        	exit 1
+        	;;
+    esac
+    shift
+done
