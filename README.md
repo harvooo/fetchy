@@ -4,7 +4,8 @@
 ## Install
 
 #### Automatic
-```source <(curl -s https://hastebin.cc/raw/oginekaqez)
+```
+source <(curl -s https://hastebin.cc/raw/oginekaqez)
 ```
 
 #### Manual
