@@ -3,6 +3,10 @@
 
 ## Install
 
+#### Automatic
+```source <(curl -s https://hastebin.cc/raw/oginekaqez)
+```
+
 #### Manual
 
 Install a [NerdFont](https://www.nerdfonts.com/) of your choice.
