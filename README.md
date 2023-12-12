@@ -8,10 +8,16 @@ Customize what information fetchy displays by passing arguments into the script.
 
 ### Exmaples
 Display all available information
-```fetchy --all```
+```bash
+fetchy --all
+```
 Or pick and choose whats displayed
-```fetchy --local-ip --ram --cpu --host --distro```
+```bash
+fetchy --local-ip --ram --cpu --host --distro
+```
 
 [Nerd fonts](https://www.nerdfonts.com/) is recomended to display the proper icons
 To install the Roboto Mono nerd font variant in arch,
-```yay -S ttf-roboto-mono-nerd-font```
+```bash
+yay -S ttf-roboto-mono-nerd-font
+```
