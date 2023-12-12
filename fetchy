@@ -61,12 +61,15 @@ while [[ $# -gt 0 ]]; do
 		--desktop)
 			echo "󰧨 : $(echo $XDG_CURRENT_DESKTOP)"
 			;;
-    	--seperator)
+    		--seperator)
 			echo ""
+			;;
+		--all)
+			echo "~/.fetchy --host --seperator --distro --kernel --packages --uptime --desktop --cpu --ram --root-usage --efi-usage --swap-usage --ipv4 --local-ip"
 			;;
 		*)
         	echo "Invalid Argument: $1"
-	    	echo "Usage: $0 [--distro] [--host] [--kernel] [--packages]"
+	    	echo "Usage: $0 [--all --host --seperator --distro --kernel --packages --uptime --desktop --cpu --ram --available-ram --used-ram --total-ram --root-usage --efi-usage --swap-usage --ipv4 --local-ip]"
         	exit 1
         	;;
     esac
